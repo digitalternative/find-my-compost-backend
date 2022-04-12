@@ -1,0 +1,40 @@
+type Compost {
+      id: Int!,
+      title: String!,
+      email: String,
+      address: Address!,
+      phone: String,
+      website: String,
+      type: String
+}
+
+type Address {
+  street: String!,
+  city: String!,
+  zipcode: Int!,
+  coordinates: Coordinates!
+}
+
+type Coordinates {
+    lat: Float!,
+    lng: Float!
+  }
+input CreateCompostInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateCompostInput {
+  id: Int!
+}
+
+type Query {
+  composts: [Compost]!
+  compost(id: Int!): Compost
+}
+
+type Mutation {
+  createCompost(createCompostInput: CreateCompostInput!): Compost!
+  updateCompost(updateCompostInput: UpdateCompostInput!): Compost!
+  removeCompost(id: Int!): Compost
+}
