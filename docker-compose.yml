@@ -36,6 +36,8 @@ services:
       - mongodb-shard0
       - mongodb-cfg
     volumes:
+      - /etc/letsencrypt/live/vps.digitalternative.be:/etc/letsencrypt/live/vps.digitalternative.be
+      - /etc/letsencrypt/archive/vps.digitalternative.be:/etc/letsencrypt/archive/vps.digitalternative.be
       - /usr/src/app/node_modules
     restart: unless-stopped   
   mongodb-sharded:
