@@ -1,0 +1,91 @@
+version: '3.3'
+
+services:
+  dev:
+    container_name: nestjs_api_dev
+    image: nestjs-api-dev:1.0.0
+    build:
+        context: .
+        target: development
+        dockerfile: ./Dockerfile
+    command: npm run start:dev #node dist/src/main #n
+    ports:
+        - 3001:3000
+    networks:
+        - nestjs-network
+    volumes:
+        - .:/usr/src/app
+        - /usr/src/app/node_modules
+    restart: unless-stopped
+  prod:
+    container_name: find-my-compost-backend
+    image: nestjs-api-prod:1.0.0
+    build:
+        context: .
+        target: production
+        dockerfile: ./Dockerfile
+    command: npm run start:prod
+    # ports:
+    #     - 3000:3000
+    #     - 9229:9229
+    expose:
+        - '3000'
+    networks:
+      - nestjs-network
+    depends_on:
+      - mongodb-sharded
+      - mongodb-shard0
+      - mongodb-cfg
+    volumes:
+      - /usr/src/app/node_modules
+    restart: unless-stopped   
+  mongodb-sharded:
+    image: docker.io/bitnami/mongodb-sharded:4.4
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-sharded
+      - MONGODB_SHARDING_MODE=mongos
+      - MONGODB_CFG_PRIMARY_HOST=mongodb-cfg
+      - MONGODB_CFG_REPLICA_SET_NAME=cfgreplicaset
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      - MONGODB_ROOT_PASSWORD=password123
+    ports:
+      - "27017:27017"
+    networks:
+      - nestjs-network
+  mongodb-shard0:
+    image: docker.io/bitnami/mongodb-sharded:4.4
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-shard0
+      - MONGODB_SHARDING_MODE=shardsvr
+      - MONGODB_MONGOS_HOST=mongodb-sharded
+      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      - MONGODB_REPLICA_SET_NAME=shard0
+    volumes:
+      - './mongodb/shard0_data:/bitnami'
+    networks:
+      - nestjs-network
+  
+  mongodb-cfg:
+    image: docker.io/bitnami/mongodb-sharded:4.4
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-cfg
+      - MONGODB_SHARDING_MODE=configsvr
+      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      - MONGODB_REPLICA_SET_NAME=cfgreplicaset
+    volumes:
+      - './mongodb/cfg_data:/bitnami'
+    networks:
+      - nestjs-network
+
+volumes:
+  shard0_data:
+    driver: local
+  cfg_data:
+    driver: local
+networks:
+    nestjs-network:
+      driver: bridge

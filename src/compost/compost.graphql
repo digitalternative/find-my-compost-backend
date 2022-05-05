@@ -1,0 +1,106 @@
+
+type Compost {
+  _id: String!,
+  title: String!,
+  manager: String!
+  email: String,
+  address: Address,
+  photo: Photo,
+  timetable: [Timetable],
+  phone: String,
+  website: String,
+  type: String,
+  user: User
+}
+
+type Coordinates {
+  lat: Float!,
+  lng: Float!
+ }
+type Address {
+  street: String,
+  city: String,
+  zipcode: Int,
+  coordinates: Coordinates!
+}
+type Photo {
+  file: String,
+  filename: String,
+}
+type Time {
+  hours: Int,
+  minutes: Int,
+  seconds: Int,
+}
+type Timetable {
+  day: Int,
+  start: Time,
+  end: Time,  
+}
+
+input InputAddress {
+  street: String,
+  city: String,
+  zipcode: Int,
+  coordinates: InputCoordinates!
+}
+
+input InputPhoto {
+  file: String,
+  filename: String,
+}
+
+input InputTime {
+  hours: Int,
+  minutes: Int,
+  seconds: Int,
+}
+
+input InputTimetable {
+  day: Int,
+  start: InputTime,
+  end: InputTime,
+}
+
+input InputCoordinates {
+  lat: Float!,
+  lng: Float!
+ }
+
+input CreateCompostInput {
+  title: String!,
+  manager: String!
+  email: String,
+  address: InputAddress,
+  photo: InputPhoto,
+  timetable: [InputTimetable],
+  phone: String,
+  website: String,
+  type: String,
+  user: String!
+}
+
+input UpdateCompostInput {
+  _id: String!,
+  title: String,
+  manager: String!
+  email: String,
+  address: InputAddress,
+  timetable: [InputTimetable],
+  photo: InputPhoto,
+  phone: String,
+  website: String,
+  type: String
+}
+
+type Query {
+  composts: [Compost]!
+  myComposts: [Compost]!
+  compost(_id: String!): Compost
+}
+
+type Mutation {
+  createCompost(createCompostInput: [CreateCompostInput]!):[Compost]!
+  updateCompost(updateCompostInput: UpdateCompostInput!): Compost!
+  removeCompost(_id: String!): Compost
+}

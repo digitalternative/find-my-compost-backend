@@ -1,0 +1,43 @@
+type User {
+  _id: String!,
+  username: String,
+  email: String!,
+  roles: [String]!,
+  favorites: [String],
+  googleId: String,
+  facebookId: String,
+  password: String!,
+}
+
+input CreateUserInput {
+  username: String,
+  password: String!,
+  passwordConfirm: String!,
+  email: String!,
+  roles: [String]!,
+  favorites: [String],
+  googleId: String,
+  facebookId: String,
+}
+
+input UpdateUserInput {
+  _id: String!,
+  username: String,
+  password: String,
+  passwordConfirm: String,
+  email: String,
+  roles: [String],
+  favorites: [String],
+}
+
+type Query {
+  user(email: String!): User
+  users: [User]
+  checkPassword(password: String!): Boolean
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(email: String!): User
+}
