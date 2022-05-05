@@ -6,8 +6,8 @@ import bodyParser from 'body-parser';
 import * as fs from 'fs';
 
 const httpsOptions = {
-  key: fs.readFileSync('./secrets/vps.digitalternative.be/fullchain.pem'),
-  cert: fs.readFileSync('./secrets/vps.digitalternative.be/privkey.pem'),
+  key: fs.readFileSync('src/secrets/vps.digitalternative.be/fullchain.pem'),
+  cert: fs.readFileSync('src/secrets/vps.digitalternative.be/privkey.pem'),
 };
 
 async function bootstrap() {
