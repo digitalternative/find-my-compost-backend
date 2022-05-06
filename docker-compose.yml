@@ -16,9 +16,10 @@ services:
       - PUID=1050
       - PGID=1050
       - EMAIL=boris.waaub@digitalternative.be
-      - URL=vps.digitalternative.be
-      - SUBDOMAINS=
+      - URL=digitalternative.be
+      - SUBDOMAINS=vps
       - TZ=Europe/Brussels
+      - VALIDATION=dns
     networks:
     - nestjs-network
   # dev:
