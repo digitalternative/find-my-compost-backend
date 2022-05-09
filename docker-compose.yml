@@ -12,6 +12,9 @@ services:
       always
     depends_on:
       - prod
+      - mongodb-sharded
+      - mongodb-shard0
+      - mongodb-cfg
     environment:
       - PUID=1050
       - PGID=1050
