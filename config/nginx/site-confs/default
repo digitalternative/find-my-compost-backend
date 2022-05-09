@@ -4,7 +4,8 @@
 server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
-	server_name https://vps.digitalternative.be;
+	server_name vps.digitalternative.be;
+	allow 127.0.0.0/8;
 	return 301 https://$host$request_uri;
 }
 
