@@ -31,11 +31,24 @@ server {
 	#include /config/nginx/authelia-server.conf;
 
 	client_max_body_size 0;
+        
+	location /find-my-compost {
+		proxy_pass http://localhost:8080;
+	}
 
 	location /find-my-compost-backend {
+		# Allow all domains to request data
+		add_header Access-Control-Allow-Origin *;
+
+		# Allow all request methods (POST, GET, OPTIONS, PUT, PATCH, DELETE, HEAD)
+		add_header Access-Control-Allow-Methods *;
+
+		# Allow all request headers sent from the client
+		add_header Access-Control-Allow-Headers *;
+
+		# Cache all of these permissions for 86400 seconds (1 day)
+		add_header Access-Control-Max-Age 86400;
 		proxy_pass http://localhost:3000;
-                proxy_set_header Access-Control-Allow-Origin *;
-                proxy_set_header Host $host;
 	}
 
 	location ~ \.php$ {
