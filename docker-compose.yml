@@ -1,9 +1,11 @@
 version: '3.3'
 
 services:
-  letsencrypt:
-    image: linuxserver/letsencrypt
-    container_name: letsencrypt
+  swag:
+    image: lscr.io/linuxserver/swag:latest
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
     ports:
       - 443:443
     volumes:
@@ -20,7 +22,6 @@ services:
       - PGID=1050
       - EMAIL=boris.waaub@digitalternative.be
       - URL=vps.digitalternative.be
-      - SUBDOMAINS=
       - TZ=Europe/Brussels
       - VALIDATION=dns
       - DNSPLUGIN=ovh
