@@ -5,6 +5,7 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 	server_name vps.digitalternative.be;
+	add_header Access-Control-Allow-Origin *;
 	allow 127.0.0.0/8;
 	return 301 https://$host$request_uri;
 }
@@ -34,33 +35,11 @@ server {
 	client_max_body_size 0;
         
 	location /find-my-compost {
-		# Allow all domains to request data
-		add_header Access-Control-Allow-Origin *;
-
-		# Allow all request methods (POST, GET, OPTIONS, PUT, PATCH, DELETE, HEAD)
-		add_header Access-Control-Allow-Methods *;
-
-		# Allow all request headers sent from the client
-		add_header Access-Control-Allow-Headers *;
-
-		# Cache all of these permissions for 86400 seconds (1 day)
-		add_header Access-Control-Max-Age 86400;
-		proxy_pass http://localhost:8080;
+		proxy_pass http://find-my-compost-frontend:8080;
 	}
 
 	location /find-my-compost/api{
-		# Allow all domains to request data
-		add_header Access-Control-Allow-Origin *;
-
-		# Allow all request methods (POST, GET, OPTIONS, PUT, PATCH, DELETE, HEAD)
-		add_header Access-Control-Allow-Methods *;
-
-		# Allow all request headers sent from the client
-		add_header Access-Control-Allow-Headers *;
-
-		# Cache all of these permissions for 86400 seconds (1 day)
-		add_header Access-Control-Max-Age 86400;
-		proxy_pass http://localhost:3000;
+		proxy_pass http://find-my-compost-backend:3000;
 	}
 
 	location ~ \.php$ {
