@@ -23,7 +23,7 @@ server {
 	root /config/www;
 	index index.html index.htm index.php;
 
-	server_name _;
+	server_name vps.digitalternative.be;;
 
 	# enable subfolder method reverse proxy confs
 	include /config/nginx/proxy-confs/*.subfolder.conf;
@@ -39,22 +39,24 @@ server {
 
 	client_max_body_size 0;
         
-	location /find-my-compost {
-	    proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header Host $http_host;
-		proxy_set_header X-NginX-Proxy true;
-		rewrite ^/?(.*) /$1 break;
+	location / {
 		proxy_pass http://find-my-compost;
 	}
 
-	location /find-my-compost/api{
-		proxy_set_header X-Real-IP $remote_addr;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	location /api{
+		# requests to the API will be proxy_pass to the backend API infra
+		# read this -> http://en.wikipedia.org/wiki/X-Forwarded-For
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+		
+		# pass the host header from the client to help with redirects 
 		proxy_set_header Host $http_host;
-		proxy_set_header X-NginX-Proxy true;
-		rewrite ^/api/?(.*) /$1 break;
+		# stops nginx from doing something silly
+        proxy_redirect off;     
+		# send the IP address and remote server address for secuirty 
+		proxy_set_header X-Real-IP $remote_addr;     
 		proxy_pass http://find-my-compost_api;
+		# Adds headers to the HTTP response 
+        add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"';  
 	}
 
 # sample reverse proxy config for password protected couchpotato running at IP 192.168.1.50 port 5050 with base url "cp"
