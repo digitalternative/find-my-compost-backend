@@ -23,7 +23,7 @@ server {
 	root /config/www;
 	index index.html index.htm index.php;
 
-	server_name vps.digitalternative.be;;
+	server_name vps.digitalternative.be;
 
 	# enable subfolder method reverse proxy confs
 	include /config/nginx/proxy-confs/*.subfolder.conf;
