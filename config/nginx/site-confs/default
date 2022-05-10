@@ -12,14 +12,14 @@ server {
 	server_name vps.digitalternative.be;
 	add_header Access-Control-Allow-Origin *;
 	allow 127.0.0.0/8;
-	return 301 https://$host$request_uri;
+	# return 301 https://$host$request_uri;
 }
 
 # main server block
 server {
 	listen 443 ssl http2 default_server;
 	listen [::]:443 ssl http2 default_server;
-
+	add_header Access-Control-Allow-Origin *;
 	root /config/www;
 	index index.html index.htm index.php;
 
