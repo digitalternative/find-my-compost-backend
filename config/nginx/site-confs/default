@@ -1,5 +1,10 @@
 ## Version 2020/05/23 - Changelog: https://github.com/linuxserver/docker-letsencrypt/commits/master/root/defaults/default
-
+upstream find-my-compost_api {
+	server	find-my-compost-backend:3000;
+}
+upstream find-my-compost {
+	server	localhost:8080;
+}
 # redirect all traffic to https
 server {
 	listen 80 default_server;
@@ -35,18 +40,20 @@ server {
 	client_max_body_size 0;
         
 	location /find-my-compost {
-		proxy_pass http://localhost:8080;
+	    proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-NginX-Proxy true;
+		proxy_pass http://find-my-compost;
 	}
 
 	location /find-my-compost/api{
-		proxy_pass http://find-my-compost-backend:3000;
-	}
-
-	location ~ \.php$ {
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		fastcgi_pass 127.0.0.1:9000;
-		fastcgi_index index.php;
-		include /etc/nginx/fastcgi_params;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-NginX-Proxy true;
+		rewrite ^/api/?(.*) /$1 break;
+		proxy_pass http://find-my-compost_api;
 	}
 
 # sample reverse proxy config for password protected couchpotato running at IP 192.168.1.50 port 5050 with base url "cp"
