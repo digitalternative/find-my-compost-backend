@@ -5,9 +5,6 @@ upstream find-my-compost_api {
 upstream find-my-compost {
 	server	find-my-compost-frontend:8080;
 }
-http {
-    include mime.types;
-}
 # redirect all traffic to https
 server {
 	listen 80 default_server;
@@ -55,5 +52,6 @@ server {
 }
 # enable subdomain method reverse proxy confs
 include /config/nginx/proxy-confs/*.subdomain.conf;
+include /config/nginx/mime.types;
 # enable proxy cache for auth
 proxy_cache_path cache/ keys_zone=auth_cache:10m;
