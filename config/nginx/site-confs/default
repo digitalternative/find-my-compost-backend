@@ -40,6 +40,16 @@ server {
 	client_max_body_size 0;
 
 	location /find-my-compost {
+		# requests to the API will be proxy_pass to the backend API infra
+		# read this -> http://en.wikipedia.org/wiki/X-Forwarded-For
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+		
+		# pass the host header from the client to help with redirects 
+		proxy_set_header Host $http_host;
+		# stops nginx from doing something silly
+        proxy_redirect off;     
+		# send the IP address and remote server address for secuirty 
+		proxy_set_header X-Real-IP $remote_addr;  
 		proxy_pass http://find-my-compost/;
 	}
 
