@@ -56,7 +56,7 @@ server {
     	proxy_set_header      X-Forwarded-Proto $scheme;
 	}
 }
-
+include mime.types;
 # enable subdomain method reverse proxy confs
 include /config/nginx/proxy-confs/*.subdomain.conf;
 # enable proxy cache for auth
