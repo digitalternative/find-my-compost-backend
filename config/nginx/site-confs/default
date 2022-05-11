@@ -33,7 +33,10 @@ server {
 
 	client_max_body_size 0;
 
+
 	location /find-my-compost {
+		rewrite ^/find-my-compost/assets(/.*)$ /assets/$1 break;
+    	rewrite ^/find-my-compost(/.*)$ /find-my-compost/$1 break;
 		proxy_pass http://find-my-compost/;
 		proxy_set_header      Host $host;
     	proxy_set_header      X-Real-IP $remote_addr;
