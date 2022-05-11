@@ -39,11 +39,11 @@ server {
 
 	client_max_body_size 0;
 
-	location /find-my-compost {
+	location /find-my-compost/ {
 		proxy_pass https://find-my-compost;
 	}
 
-	location /find-my-compost/api{
+	location /find-my-compost/api/ {
 		# requests to the API will be proxy_pass to the backend API infra
 		# read this -> http://en.wikipedia.org/wiki/X-Forwarded-For
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
