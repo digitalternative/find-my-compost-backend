@@ -1,9 +1,9 @@
 ## Version 2020/05/23 - Changelog: https://github.com/linuxserver/docker-letsencrypt/commits/master/root/defaults/default
 upstream find-my-compost_api {
-	server	127.0.0.1:3000;
+	server	find-my-compost-backend:3000;
 }
 upstream find-my-compost {
-	server	127.0.0.1:8080;
+	server	find-my-compost-frontend:8080;
 }
 # redirect all traffic to https
 server {
