@@ -40,7 +40,7 @@ server {
 	client_max_body_size 0;
 
 	location /find-my-compost {
-		proxy_pass https://find-my-compost/;
+		proxy_pass http://find-my-compost/;
 	}
 
 	location ~ ^/find-my-compost/api(/?)(.*) {
