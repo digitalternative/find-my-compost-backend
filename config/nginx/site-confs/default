@@ -5,6 +5,9 @@ upstream find-my-compost_api {
 upstream find-my-compost {
 	server	find-my-compost-frontend:8080;
 }
+http {
+    include mime.types;
+}
 # redirect all traffic to https
 server {
 	listen 80 default_server;
@@ -42,14 +45,6 @@ server {
     	proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
     	proxy_set_header      X-Forwarded-Proto $scheme;
 	}
-	location /assets {
-		proxy_pass_header Content-Type;
-		proxy_pass http://find-my-compost/assets/;
-		proxy_set_header      Host $host;
-    	proxy_set_header      X-Real-IP $remote_addr;
-    	proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
-    	proxy_set_header      X-Forwarded-Proto $scheme;
-	}
 	location /find-my-compost_api {
 		proxy_pass http://find-my-compost_api/;
 		proxy_set_header      Host $host;
@@ -58,7 +53,6 @@ server {
     	proxy_set_header      X-Forwarded-Proto $scheme;
 	}
 }
-include mime.types;
 # enable subdomain method reverse proxy confs
 include /config/nginx/proxy-confs/*.subdomain.conf;
 # enable proxy cache for auth
