@@ -23,8 +23,6 @@ async function bootstrap() {
   );
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
-  // Only for production
-  app.setGlobalPrefix('/api/find-my-compost');
   await app.listen(3000);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
