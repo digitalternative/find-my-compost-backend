@@ -14,7 +14,7 @@ export class FacebookOauthStrategy extends PassportStrategy(
     super({
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbackURL: '/auth/facebook/redirect',
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL + '/redirect',
       scope: ['email'],
       profileFields: ['emails', 'displayName', 'id', 'name'],
     });

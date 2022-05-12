@@ -13,6 +13,9 @@ import {
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from '@nestjs/passport';
+import { config } from 'dotenv';
+
+config();
 
 @Controller()
 export class AppController {
@@ -34,9 +37,9 @@ export class AppController {
     const social = params.social;
     session.redirectTo = req.headers.referer;
     if (social == 'google') {
-      return res.redirect('/auth/google');
+      return res.redirect(process.env.GOOGLE_CALLBACK_URL);
     } else if (social == 'facebook') {
-      return res.redirect('/auth/facebook');
+      return res.redirect(process.env.FACEBOOK_CALLBACK_URL);
     }
     return HttpStatus.OK;
   }
