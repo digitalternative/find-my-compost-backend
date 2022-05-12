@@ -15,10 +15,10 @@ config();
   imports: [
     CompostModule,
     GraphQLModule.forRoot({
-      cors: {
-        origin: 'http://localhost:3000',
-        credentials: true,
-      },
+      // cors: {
+      //   origin: 'http://localhost:3000',
+      //   credentials: true,
+      // },
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
