@@ -37,9 +37,9 @@ export class AppController {
     const social = params.social;
     session.redirectTo = req.headers.referer;
     if (social == 'google') {
-      return res.redirect(process.env.GOOGLE_CALLBACK_URL);
+      return res.redirect('api/find-my-compost/auth/google');
     } else if (social == 'facebook') {
-      return res.redirect(process.env.FACEBOOK_CALLBACK_URL);
+      return res.redirect('api/find-my-compost/auth/facebook');
     }
     return HttpStatus.OK;
   }
