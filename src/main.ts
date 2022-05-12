@@ -6,8 +6,8 @@ import bodyParser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(bodyParser.json({ limit: '3mb' }));
-  app.use(bodyParser.urlencoded({ limit: '3mb', extended: true }));
+  app.use(bodyParser.json({ limit: '6mb' }));
+  app.use(bodyParser.urlencoded({ limit: '6mb', extended: true }));
   app.use(
     session({
       secret: '1aa39aea352b1178e314c44c6cbc8b91ade24cd1',
