@@ -75,7 +75,7 @@ services:
       - MONGODB_CFG_PRIMARY_HOST=mongodb-cfg
       - MONGODB_CFG_REPLICA_SET_NAME=cfgreplicaset
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
-      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_ROOT_PASSWORD=1aa39aea352b1178e314c44c6cbc8b91ade24cd1
     ports:
       - "27017:27017"
     networks:
@@ -86,7 +86,7 @@ services:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-shard0
       - MONGODB_SHARDING_MODE=shardsvr
       - MONGODB_MONGOS_HOST=mongodb-sharded
-      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_ROOT_PASSWORD=1aa39aea352b1178e314c44c6cbc8b91ade24cd1
       - MONGODB_REPLICA_SET_MODE=primary
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
       - MONGODB_REPLICA_SET_NAME=shard0
@@ -100,7 +100,7 @@ services:
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-cfg
       - MONGODB_SHARDING_MODE=configsvr
-      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_ROOT_PASSWORD=1aa39aea352b1178e314c44c6cbc8b91ade24cd1
       - MONGODB_REPLICA_SET_MODE=primary
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
       - MONGODB_REPLICA_SET_NAME=cfgreplicaset
