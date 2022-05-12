@@ -1,6 +1,6 @@
 ## Version 2020/05/23 - Changelog: https://github.com/linuxserver/docker-letsencrypt/commits/master/root/defaults/default
 upstream find-my-compost_api {
-	server	find-my-compost-backend:3000/api/find-my-compost;
+	server	find-my-compost-backend:3000;
 }
 upstream find-my-compost {
 	server	find-my-compost-frontend:8080;
@@ -51,7 +51,7 @@ server {
     	proxy_set_header      X-Forwarded-Proto $scheme;
 	}
 	location /api/find-my-compost {
-		proxy_pass http://find-my-compost_api/;
+		proxy_pass http://find-my-compost_api;
 		proxy_set_header      Host $host;
     	proxy_set_header      X-Real-IP $remote_addr;
     	proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
