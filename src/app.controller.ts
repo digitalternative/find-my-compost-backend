@@ -36,6 +36,7 @@ export class AppController {
   ) {
     const social = params.social;
     session.redirectTo = req.headers.referer;
+    console.log(social, session.redirectTo);
     if (social == 'google') {
       return res.redirect(process.env.GOOGLE_CALLBACK_URL);
     } else if (social == 'facebook') {
