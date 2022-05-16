@@ -1,11 +1,9 @@
-# Backup folder for mongodb 
-sudo cp -R mongodb mongodb.old
 # Create folder for mongodb 
-sudo rm -rf  mongodb
 mkdir mongodb
 mkdir mongodb/cfg_data
 mkdir mongodb/shard0_data
 sudo chown -R 1001:1001 mongodb
+sudo chown -R 777 mongodb
 sudo cp config/nginx/site-confs/default /opt/appdata/letsencrypt/config/nginx/site-confs/default
 docker-compose stop
 docker-compose rm
