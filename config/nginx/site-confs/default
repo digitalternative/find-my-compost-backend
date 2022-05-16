@@ -11,6 +11,7 @@ server {
 	listen [::]:80 default_server;
 	server_name vps.digitalternative.be;
 	add_header Access-Control-Allow-Origin *;
+	add_header 'Content-Security-Policy' 'upgrade-insecure-requests';
 	allow all;
 	# return 301 https://$host$request_uri;
 }
