@@ -3,7 +3,7 @@ mkdir mongodb
 mkdir mongodb/cfg_data
 mkdir mongodb/shard0_data
 sudo chown -R 1001:1001 mongodb
-sudo chown -R 777 mongodb
+sudo chmod -R 777 mongodb
 sudo cp config/nginx/site-confs/default /opt/appdata/letsencrypt/config/nginx/site-confs/default
 docker-compose stop
 docker-compose rm
