@@ -1,3 +1,5 @@
+# Backup folder for mongodb 
+sudo cp -R mongodb mongodb.old
 # Create folder for mongodb 
 sudo rm -rf  mongodb
 mkdir mongodb
