@@ -9,5 +9,5 @@ docker-compose stop
 docker-compose rm
 docker image rm nestjs-api-prod:1.0.0
 docker system prune
-docker-compose up -d prod
+docker-compose up -d
 docker logs find-my-compost-backend -f
