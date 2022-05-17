@@ -3,7 +3,7 @@ upstream find-my-compost_api {
 	server	find-my-compost-backend:3000;
 }
 upstream find-my-compost {
-	server	find-my-compost-frontend:8080;
+	server	find-my-compost-frontend:8080/find-my-compost/;
 }
 # redirect all traffic to https
 server {
@@ -32,14 +32,14 @@ server {
 	include /config/nginx/ssl.conf;
 
 	client_max_body_size 0;
-	location / {
-		proxy_pass_header Content-Type;
-		proxy_pass http://find-my-compost/;
-		proxy_set_header      Host $host;
-    	proxy_set_header      X-Real-IP $remote_addr;
-    	proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
-    	proxy_set_header      X-Forwarded-Proto $scheme;
-	}
+	# location / {
+	# 	proxy_pass_header Content-Type;
+	# 	proxy_pass http://find-my-compost/;
+	# 	proxy_set_header      Host $host;
+    # 	proxy_set_header      X-Real-IP $remote_addr;
+    # 	proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+    # 	proxy_set_header      X-Forwarded-Proto $scheme;
+	# }
 	# location /assets {
 	# 	proxy_pass_header Content-Type;
 	# 	proxy_pass http://find-my-compost/assets/;
