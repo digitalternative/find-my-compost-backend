@@ -8,7 +8,6 @@ import {
   Res,
   HttpStatus,
   Param,
-  Session,
 } from '@nestjs/common';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
@@ -28,14 +27,8 @@ export class AppController {
   }
 
   @Get('login/:social')
-  async loginSocial(
-    @Param() params,
-    @Req() req,
-    @Res() res,
-    @Session() session,
-  ) {
+  async loginSocial(@Param() params, @Req() req, @Res() res) {
     const social = params.social;
-    session.redirectTo = req.headers.referer;
     if (social == 'google') {
       return res.redirect('/api/find-my-compost/auth/google');
     } else if (social == 'facebook') {
@@ -58,22 +51,26 @@ export class AppController {
 
   @Get('auth/facebook/redirect')
   @UseGuards(AuthGuard('facebook'))
-  async redirectFacebook(@Req() req, @Res() res, @Session() session) {
-    const redirectTo = session.redirectTo;
+  async redirectFacebook(@Req() req, @Res() res) {
     const payload = await this.authService.loginWithSocial(
       req.user,
       'facebook',
     );
     const encodedPayload = encodeURIComponent(JSON.stringify(payload));
-    return res.redirect(redirectTo + '#login/?payload=' + encodedPayload);
+    return res.redirect(
+      'https://vps.digitalternative.be/find-my-compost#/login/?payload=' +
+        encodedPayload,
+    );
   }
 
   @Get('auth/google/redirect')
   @UseGuards(AuthGuard('google'))
-  async redirectGoogle(@Req() req, @Res() res, @Session() session) {
-    const redirectTo = session.redirectTo;
+  async redirectGoogle(@Req() req, @Res() res) {
     const payload = await this.authService.loginWithSocial(req.user, 'google');
     const encodedPayload = encodeURIComponent(JSON.stringify(payload));
-    return res.redirect(redirectTo + '#login/?payload=' + encodedPayload);
+    return res.redirect(
+      'https://vps.digitalternative.be/find-my-compost#/login/?payload=' +
+        encodedPayload,
+    );
   }
 }
