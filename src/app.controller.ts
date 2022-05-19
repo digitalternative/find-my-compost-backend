@@ -65,7 +65,7 @@ export class AppController {
       'facebook',
     );
     const encodedPayload = encodeURIComponent(JSON.stringify(payload));
-    return res.redirect(redirectTo + '#login/?payload=' + encodedPayload);
+    return res.redirect(redirectTo + 'login/?payload=' + encodedPayload);
   }
 
   @Get('auth/google/redirect')
@@ -74,6 +74,6 @@ export class AppController {
     const redirectTo = session.redirectTo;
     const payload = await this.authService.loginWithSocial(req.user, 'google');
     const encodedPayload = encodeURIComponent(JSON.stringify(payload));
-    return res.redirect(redirectTo + '#login/?payload=' + encodedPayload);
+    return res.redirect(redirectTo + 'login/?payload=' + encodedPayload);
   }
 }
