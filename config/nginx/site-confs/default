@@ -35,7 +35,6 @@ server {
 
 	location / { 
 		root /public;
-		default_type application/json;
 	}
 	location /.well-known { 
 		root /public/.well-known;
