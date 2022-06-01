@@ -34,8 +34,7 @@ server {
 	client_max_body_size 0;
 
 	location /.well-known/assetlinks.json {
-		add_header  Content-Type    application/json;
-		default_type 'application/json';
+		default_type application/json;
 	}
 
 	location /assets {
@@ -64,6 +63,6 @@ server {
 }
 # enable subdomain method reverse proxy confs
 include /config/nginx/proxy-confs/*.subdomain.conf;
-#include /config/nginx/mime.types;
+include /config/nginx/mime.types;
 # enable proxy cache for auth
 proxy_cache_path cache/ keys_zone=auth_cache:10m;
