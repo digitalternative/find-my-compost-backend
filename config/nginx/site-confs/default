@@ -33,11 +33,11 @@ server {
 
 	client_max_body_size 0;
 
-	location /.well-known { 
-		add_header  Content-Type    application/json;
-		alias /config/www/public/.well-known;
+	# location /.well-known { 
+	# 	add_header  Content-Type    application/json;
+	# 	alias /config/www/public/.well-known;
 
-	}
+	# }
 	location /assets {
 		proxy_pass_header Content-Type;
 		proxy_pass http://find-my-compost/assets/;
