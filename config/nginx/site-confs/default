@@ -36,7 +36,10 @@ server {
 	location /.well-known/assetlinks.json {
 		default_type application/json;
 	}
-
+	location ~ ^/get_json {
+	default_type application/json;
+	return 200 '{"status":"success","result":"nginx test json"}';
+	}
 	location /assets {
 		proxy_pass_header Content-Type;
 		proxy_pass http://find-my-compost/assets/;
@@ -63,6 +66,6 @@ server {
 }
 # enable subdomain method reverse proxy confs
 include /config/nginx/proxy-confs/*.subdomain.conf;
-include /config/nginx/mime.types;
+# include /config/nginx/mime.types;
 # enable proxy cache for auth
 proxy_cache_path cache/ keys_zone=auth_cache:10m;
