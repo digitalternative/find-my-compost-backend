@@ -32,9 +32,9 @@ server {
 	include /config/nginx/ssl.conf;
 
 	client_max_body_size 0;
-	
+
 	location /.well-known { 
-		root /public/.well-known;
+		alias /config/www/public/.well-known;
 		default_type application/json;
 	}
 	location /assets {
