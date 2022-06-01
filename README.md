@@ -79,4 +79,6 @@ Nest is [MIT licensed](LICENSE).
 sudo ufw allow proto tcp from any to any port 80,443
 # Autoriser uniquement localhost sur 5000 et 8080
 sudo ufw allow proto tcp from 127.0.0.1 port 5000,8080
+# Autoriser le port pour ssh
+sudo ufw allow 54321 
 ```
