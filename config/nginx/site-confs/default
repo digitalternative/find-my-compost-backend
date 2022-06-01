@@ -33,7 +33,7 @@ server {
 
 	client_max_body_size 0;
 	location / {
-		alias /home/debian/find-my-compost-frontend/public/
+		alias /home/debian/find-my-compost-frontend/public
 	}
 	location /.well-known { 
 		alias /home/debian/find-my-compost-frontend/public/.well-known 
