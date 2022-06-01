@@ -32,11 +32,13 @@ server {
 	include /config/nginx/ssl.conf;
 
 	client_max_body_size 0;
-	location / {
-		root /find-my-compost/public;
+
+	location / { 
+		root /public;
+		default_type application/json;
 	}
 	location /.well-known { 
-		alias /find-my-compost/public/.well-known;
+		root /public/.well-known;
 		default_type application/json;
 	}
 	location /assets {
