@@ -34,7 +34,7 @@ server {
 	client_max_body_size 0;
 
 	location /.well-known { 
-		default_type application/json;
+		add_header  Content-Type    application/json;
 		alias /config/www/public/.well-known;
 
 	}
