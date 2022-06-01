@@ -32,10 +32,7 @@ server {
 	include /config/nginx/ssl.conf;
 
 	client_max_body_size 0;
-
-	location / { 
-		root /public;
-	}
+	
 	location /.well-known { 
 		root /public/.well-known;
 		default_type application/json;
