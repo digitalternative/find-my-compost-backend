@@ -2,6 +2,7 @@
 mkdir mongodb
 mkdir mongodb/cfg_data
 mkdir mongodb/shard0_data
+sudo cp -R /home/debian/find-my-compost-frontend/public/ /opt/appdata/letsencrypt/config/www/find-my-compost/
 sudo cp config/nginx/site-confs/default /opt/appdata/letsencrypt/config/nginx/site-confs/default
 docker-compose stop
 docker-compose rm
