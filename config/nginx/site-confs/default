@@ -34,8 +34,9 @@ server {
 	client_max_body_size 0;
 
 	location /.well-known { 
-		alias /config/www/public/.well-known;
 		default_type application/json;
+		alias /config/www/public/.well-known;
+
 	}
 	location /assets {
 		proxy_pass_header Content-Type;
