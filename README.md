@@ -71,3 +71,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+## UFW
+```bash
+# Autoriser tout le trafic HTTP et HTTPS entrant
+sudo ufw allow proto tcp from any to any port 80,443
+# Autoriser uniquement localhost sur 5000 et 8080
+sudo ufw allow proto tcp from 127.0.0.1 port 5000,8080
+```
