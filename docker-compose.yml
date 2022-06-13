@@ -1,33 +1,6 @@
 version: '3.3'
 
 services:
-  swag:
-    image: lscr.io/linuxserver/swag:latest
-    container_name: swag
-    cap_add:
-      - NET_ADMIN
-    ports:
-      - 443:443
-    volumes:
-      - /opt/appdata/letsencrypt/config:/config
-    restart:
-      always
-    depends_on:
-      - prod
-      - mongodb-sharded
-      - mongodb-shard0
-      - mongodb-cfg
-    environment:
-      - PUID=1050
-      - PGID=1050
-      - EMAIL=boris.waaub@digitalternative.be
-      - URL=vps.digitalternative.be
-      - TZ=Europe/Brussels
-      - VALIDATION=dns
-      - DNSPLUGIN=ovh
-    networks:
-      - nestjs-network
-      - find-my-compost-frontend_vps-network
   # dev:
   #   container_name: nestjs_api_dev
   #   image: nestjs-api-dev:1.0.0
